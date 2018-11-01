@@ -57,7 +57,6 @@ function shuffle(array) {
      *  Assign proper class(picture and status) to repective cards
      */
     let cardUL = document.querySelector('.deck');
-    //console.log(cardUL);
     cards.forEach((card, i) => {
         //Get current card
         let currCard = cardUL.children[i];
@@ -95,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Success modal's close
     const successModalClose = document.querySelector('.modal_close');
     //Success modal's restart
-    const successModalRestart = document.querySelector('.success_restart');
+    const successModalRestart = document.querySelectorAll('.success_restart');
 
     /*
     * Score panel
@@ -131,8 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     //Restart game from modal
-    successModalRestart.addEventListener('click', () => {
-        reset();
+    successModalRestart.forEach((curr) => {
+        curr.addEventListener('click', () => {
+            reset();
+        });
     });
     
     //Function to reset the game
@@ -166,9 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < deckCards.length; ++i) {
             const currCard = deckCards.item(i);
             currCard.addEventListener('click', (event) => {
-                //Log the click event
-                console.log("clicked" + i);
-
                 //If card is already opened or matched, do nothing
                 if (cards[i].status != status.CLOSED)
                    return;
