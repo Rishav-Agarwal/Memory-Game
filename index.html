@@ -1,18 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Memory Game</title>
-    <meta name="description" content="">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
     <div class="container">
         <!-- Game title -->
         <header>
-            <h1>Memory Game</h1>
+            <h1 class="game-title">Memory Game</h1>
         </header>
 
         <!-- Score panel -->
@@ -24,70 +24,78 @@
         		<li class="fas fa-star"></li>
         	</ul>
 
-            <!-- Moves -->
-            <b>&emsp;<span class="moves">0</span></b> Moves
+            <!-- Moves and timer div -->
+            <div class="moves-timer">
+                <!-- Moves -->
+                <span><b class="moves">0</b>&nbsp;Moves</span>
+
+                <!-- Timer -->
+                <b class="timer">00:00</b>
+            </div>
 
             <!-- Restart button -->
         	<i class="fas fa-redo restart success_restart tooltip"><span class="tooltiptext">Restart</span></i>
         </section>
 
         <!-- Cards deck - unordered list of cards -->
-        <ul class="deck">
-            <li class="card match">
-                <i class="fas fa-gem"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-paper-plane"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-anchor"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-bolt"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-cube"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-anchor"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-leaf"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-motorcycle"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-gem"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-bomb"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-leaf"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-bomb"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-bolt"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-motorcycle"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-paper-plane"></i>
-            </li>
-            <li class="card match">
-                <i class="fas fa-cube"></i>
-            </li>
-        </ul>
+        <div class="deck-container">
+            <ul class="deck">
+                <li class="card match">
+                    <i class="fas fa-gem"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-paper-plane"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-anchor"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-bolt"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-cube"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-anchor"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-leaf"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-motorcycle"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-gem"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-bomb"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-leaf"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-bomb"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-bolt"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-motorcycle"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-paper-plane"></i>
+                </li>
+                <li class="card match">
+                    <i class="fas fa-cube"></i>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <!-- Success modal -->
 
     <!-- Modal's background - to hide the webpage -->
-    <div class="modal_back hide">
+    <div class="modal_back visible">
         <!-- Modal -->
         <div class="modal--success">
             <!-- Close button -->
@@ -99,9 +107,11 @@
             <!-- Modal's body -->
             <div class="modal_body">
                 <!-- Show the moves -->
-                <span>You completed the game in <b class="result_moves">xx</b> moves<br></span>
+                <p>You completed the game in <b class="result_moves">xx</b> moves<br></p>
+                <!-- Show the time taken -->
+                <p>You completed the game in <b class="result_mins">xx</b> mins and <b class="result_secs">xx</b> secs</p>
                 <!-- Show the rating -->
-                <span>Your rating is <b class="result_rating">x.x</b></span>
+                <p>Your rating is <b class="result_rating">x.x</b></p>
                 <!-- Restart button -->
                 <i class="fas fa-redo success_restart tooltip"><span class="tooltiptext">Restart</span></i>
             </div>

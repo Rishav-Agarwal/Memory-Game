@@ -25,6 +25,51 @@ function Card(tileType, status) {
     this.status = status;
 }
 
+/**
+ * Timer class to update game timer every second
+ * `start()` starts te timer and `stop()` stops the timer
+ */
+class Timer {
+
+    //Constructor accepts the node where the timer as to show
+    constructor(ele) {
+        this.element = ele;
+    }
+
+    //Start the timer
+    start() {
+        //Fetch the start time of the game
+        this.startTime = new Date().getTime();
+        //Call the callback function after every second to update the timer
+        this.timerInterval = setInterval(() => {
+            //Get current time
+            const date = new Date();
+
+            //Format the time to mins:secs
+            let millis = date.getTime() - this.startTime;
+            let secs = parseInt(millis / 1000);
+            millis %= parseInt(1000);
+            let mins = parseInt(secs / 60);
+            secs = parseInt(secs % 60);
+
+            //Update the time
+            this.element.textContent = ("0" + mins).slice(-2) + ":" + ("0" + secs).slice(-2);
+        }, 1000);
+    }
+
+    //Stop the timer
+    stop() {
+        window.clearInterval(this.timerInterval);
+        this.timerInterval = null;
+    }
+
+    //Reset the timer
+    reset() {
+        this.stop();
+        this.element.textContent = "00:00";
+    }
+}
+
 //Create array of cards which stores each cards' information
 let cards = [], i = 0;
 for (let tile in tiles) {
@@ -81,6 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
     */
     //Cards deck - unordered list
     const deck = document.querySelector('.deck');
+    const deckContainer = document.getElementsByClassName('deck-container').item(0);
+    //Set deck's height equal to its width every time window resizes
+    deckContainer.setAttribute('style', 'height:' + deckContainer.getBoundingClientRect().width + "px;");
+    window.addEventListener('resize', () => {
+        deckContainer.setAttribute('style', 'height:' + deckContainer.getBoundingClientRect().width + "px;");
+    });
 
     /*
     * Success Modal elements
@@ -89,6 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalSuccess = document.querySelector('.modal_back');
     //Success modal's moves
     const modalMoves = document.querySelector('.result_moves');
+    //Success modal's time in minutes
+    const modalTimeMins = document.querySelector('.result_mins');
+    //Success modal's time in seconds
+    const modalTimeSecs = document.querySelector('.result_secs');
     ///Success modal's time
     const modalRating = document.querySelector('.result_rating');
     //Success modal's close
@@ -99,10 +154,12 @@ document.addEventListener('DOMContentLoaded', () => {
     /*
     * Score panel
     */
-    //Moves - span
+    //Moves
     const spanMoves = document.querySelector('.moves');
-    //Rating - unordered list
+    //Rating
     const ulRating = document.querySelector('.stars');
+    //Timer
+    const spanTimer = document.querySelector('.timer');
 
     /*
     * Variables to denote status of the game
@@ -115,6 +172,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let matched = 0;
     //Store position of previous card clicked
     let prev = null;
+    //Variable to store whether match has started
+    let hasStarted = false;
+    //Timer variable to update time
+    let timer = new Timer(spanTimer);
 
     //Reset/Refresh the game
     reset();
@@ -161,6 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
         //Reset prev card
         prev = null;
 
+        //Reset timer
+        hasStarted = false;
+        timer.reset();
+
         //Get all the cards from deck
         const deckCards = deck.children;
         //Iterate trough the cards and add click listeners to them
@@ -170,6 +235,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 //If card is already opened or matched, do nothing
                 if (cards[i].status != status.CLOSED)
                    return;
+                
+                //If this is the first move, start the game and timer
+                if (!hasStarted) {
+                    hasStarted = true;
+                    timer.start();
+                }
 
                 //Open the clicked card
                 cards[i].status = status.OPENED;
@@ -245,7 +316,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             matched += 2;
                             //If all cards(16) are matched, show the success modal and end the game
                             if (matched == 16) {
+                                hasStarted = false;
+                                timer.stop();
                                 modalMoves.textContent = moves.toString();
+                                modalTimeMins.textContent = spanTimer.textContent.slice(0, 2);
+                                modalTimeSecs.textContent = spanTimer.textContent.slice(-2);
                                 modalRating.textContent = rating.toString();
                                 modalSuccess.classList.remove('hide');
                                 modalSuccess.classList.add('visible');

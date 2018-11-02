@@ -21,6 +21,7 @@ body {
     font-family: 'Coda', cursive;
 }
 
+/* Game container */
 .container {
     display: flex;
     justify-content: center;
@@ -97,28 +98,42 @@ h1 {
     bottom: 120%;
 }
 
+/* Name of the game */
+.game-title {
+    text-align: center;
+    font-size: 32px;
+    margin: 4px;
+}
 
 /*
  * Styles for the deck of cards
  */
 
-.deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 3em;
+ /* Container for cards' deck */
+.deck-container {
+    max-width: 100%;
+    height: 100%;
 }
 
+.deck {
+    list-style: none;
+    padding: 4px;
+    width: 600px;
+    max-width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #00a1f2 0%, #aa7ecd 100%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Cards of the deck */
 .deck .card {
-    height: 125px;
-    width: 125px;
+    min-width: 16px;
+    min-height: 16px;
+    width: 23%;
+    height: 23%;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -136,7 +151,7 @@ h1 {
     cursor: default;
     transform: rotateY(0);
     background: #02b3e4;
-    font-size: 33px;
+    font-size: 24px;
 }
 
 /* Closed card's style */
@@ -150,7 +165,7 @@ h1 {
     cursor: default;
     transform: rotateY(0);
     background: #02ccba;
-    font-size: 33px;
+    font-size: 24px;
 }
 
 
@@ -159,16 +174,18 @@ h1 {
  */
 
 .score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    text-align: center;
+    width: 50%;
+    max-width: 600px;
 }
 
+/* Rating stars */
 .score-panel .stars {
+    color: #00a1f2;
     margin: 0;
-    padding: 0;
+    padding: 8px;
     display: inline-block;
-    margin: 0 5px 0 0;
 }
 
 .score-panel .stars li {
@@ -176,9 +193,9 @@ h1 {
     display: inline-block;
 }
 
-.score-panel .restart {
-    float: right;
-    cursor: pointer;
+.moves-timer {
+    display: flex;
+    justify-content: space-around;
 }
 
 
@@ -191,7 +208,7 @@ h1 {
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-    width: 60%;
+    width: 90%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -201,24 +218,29 @@ h1 {
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
+/* Modal's header */
 .modal_header {
     display: flex;
     justify-content: center;
 }
 
+/* Modal's close button */
 .modal_close {
+    font-size: 20px;
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
 }
 
+/* Horizontal line seperating header and body */
 .modal_hr {
     height: 1px;
     width: 100%;
     border: 1px solid #0000002a;
 }
 
+/* Content of modal */
 .modal_body {
     margin: 12px;
     display: flex;
@@ -226,6 +248,7 @@ h1 {
     align-items: center;
 }
 
+/* Restart button (all) */
 .success_restart {
     margin: 4px;
     padding: 8px;
