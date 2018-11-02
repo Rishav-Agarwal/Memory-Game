@@ -1,20 +1,22 @@
 # Memory Game Project
 
-## Table of Contents
-
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+A simple memory game made as part of Udacity-Google Front-end web developer scholarship program.
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+1. Click on two cards to reveal their content.
+2. Match two cards to mark them as MATCHED.
+3. Game goes on until all the pair of cards(currently 16) are matched.
+4. On success, the game shows a congratulations popup showing total moves used, total time taken and user's rating.
 
-To get started, open `js/app.js` and start building out the app's functionality
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Features
 
-## Contributing
+1. Moves counter
+2. Timer
+3. Rating system
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## Dependencies
+
+This project uses [Font Awesome](https://fontawesome.com/) for icons.
